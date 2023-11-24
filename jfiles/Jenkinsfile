@@ -1,12 +1,22 @@
 pipeline {
     agent {
-         node {
+        node {
             label 'Node1'
-            //customWorkspace '/some/other/path'
+            // customWorkspace '/some/other/path'
+        }
+    }
+
+    stages {
+        stage('Print Environment') {
+            steps {
+                script {
+                    echo "Branch Name: ${env.BRANCH_NAME}"
+                    echo "Build Result: ${currentBuild.result}"
+                    echo "Custom Workspace: ${env.WORKSPACE}"
+                }
             }
         }
 
-    stages {
         stage('Test') {
             when {
                 expression { return env.BRANCH_NAME == 'Develop' }
