@@ -1,13 +1,13 @@
 pipeline {
-   
+    agent none
 
     stages {
-        agent {
-            node {
-                label 'Development'
-            }
-        }
         stage('Print Environment') {
+            agent {
+                node {
+                    label 'Development'
+                }
+            }
             steps {
                 script {
                     echo "Branch Name: ${env.BRANCH_NAME}"
@@ -18,6 +18,11 @@ pipeline {
         }
 
         stage('Test') {
+            agent {
+                node {
+                    label 'Development'
+                }
+            }
             when {
                 expression { true }
             }
@@ -32,14 +37,14 @@ pipeline {
         }
 
         stage('Deploy to Prod') {
+            agent {
+                node {
+                    label 'Production'
+                }
+            }
             when {
                 expression { true }
             }
-            agent {
-            node {
-                label 'Production'
-            }
-        }
             steps {
                 script {
                     echo "Copying files to prod node..."
