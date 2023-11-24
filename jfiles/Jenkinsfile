@@ -5,38 +5,42 @@ pipeline {
             //customWorkspace '/some/other/path'
             }
         }
- 
-    stages {
-        stage('Master Branch Deploy Code') {
-            
-            steps {
-                sh """
-                echo "Building Artifact from Master branch"
-                """
 
-                sh """
-                echo "Deploying Code from Master branch"
-                """
+    stages {
+        stage('Test') {
+            when {
+                expression { return env.BRANCH_NAME == 'Develop' }
+            }
+            steps {
+                script {
+                    echo "Triggering test job..."
+                    sh "ls -ltr"
+                    sh "cat update1"
+                    build job: 'test'
+                }
             }
         }
-      stage('Develop Branch Deploy Code') {
-          
+
+        stage('Deploy to Prod') {
+            when {
+                expression { return env.BRANCH_NAME == 'Production' && currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
+            }
             steps {
-                
-                sh "ls -ltr"
-                sh "cat update1"
-                sh """
-                echo "Building Artifact from Develop branch"
-                """
-                sh """
-                echo "Deploying Code from Develop branch"
-                """
-           }
+                script {
+                    echo "Copying files to prod node..."
+                    sh "ls -ltr"
+                    sh "cat update1"
+                    // Add your deployment steps here
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline completed successfully!"
         }
     }
 }
-
-  //test  
-  
 
                
