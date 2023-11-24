@@ -27,13 +27,13 @@ pipeline {
             }
             steps {
                 echo 'Hello world!'
-                sh "ls -ltr"
-                sh """
-                echo "Building Artifact from Develop branch"
-                """
-                sh """
-                echo "Deploying Code from Develop branch"
-                """
+                // sh "ls -ltr"
+                // sh """
+                // echo "Building Artifact from Develop branch"
+                // """
+                // sh """
+                // echo "Deploying Code from Develop branch"
+                // """
            }
         }
     }
