@@ -8,9 +8,7 @@ pipeline {
  
     stages {
         stage('Master Branch Deploy Code') {
-            when {
-                branch 'master'
-            }
+            
             steps {
                 sh """
                 echo "Building Artifact from Master branch"
@@ -22,18 +20,17 @@ pipeline {
             }
         }
       stage('Develop Branch Deploy Code') {
-            // when {
-            //     branch 'develop'
-            // }
+          
             steps {
-                echo 'Hello world!'
-                // sh "ls -ltr"
-                // sh """
-                // echo "Building Artifact from Develop branch"
-                // """
-                // sh """
-                // echo "Deploying Code from Develop branch"
-                // """
+                
+                sh "ls -ltr"
+                sh "cat update1"
+                sh """
+                echo "Building Artifact from Develop branch"
+                """
+                sh """
+                echo "Deploying Code from Develop branch"
+                """
            }
         }
     }
