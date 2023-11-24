@@ -1,11 +1,12 @@
 pipeline {
-    agent {
-        node {
-            label 'Node1'
-        }
-    }
+   
 
     stages {
+        agent {
+            node {
+                label 'Development'
+            }
+        }
         stage('Print Environment') {
             steps {
                 script {
@@ -34,6 +35,11 @@ pipeline {
             when {
                 expression { true }
             }
+            agent {
+            node {
+                label 'Production'
+            }
+        }
             steps {
                 script {
                     echo "Copying files to prod node..."
