@@ -2,7 +2,6 @@ pipeline {
     agent {
         node {
             label 'Node1'
-            // customWorkspace '/some/other/path'
         }
     }
 
@@ -19,7 +18,7 @@ pipeline {
 
         stage('Test') {
             when {
-                expression { return env.BRANCH_NAME == 'Develop' }
+                expression { true }
             }
             steps {
                 script {
@@ -33,7 +32,7 @@ pipeline {
 
         stage('Deploy to Prod') {
             when {
-                expression { return env.BRANCH_NAME == 'Production' && currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
+                expression { true }
             }
             steps {
                 script {
@@ -52,5 +51,3 @@ pipeline {
         }
     }
 }
-
-               
