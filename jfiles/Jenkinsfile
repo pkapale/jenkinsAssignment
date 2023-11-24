@@ -22,9 +22,9 @@ pipeline {
             }
         }
       stage('Develop Branch Deploy Code') {
-            when {
-                branch 'develop'
-            }
+            // when {
+            //     branch 'develop'
+            // }
             steps {
                 echo 'Hello world!'
                 // sh "ls -ltr"
